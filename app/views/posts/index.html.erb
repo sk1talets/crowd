@@ -1,0 +1,12 @@
+<%= link_to 'create new post', new_post_path %>
+<table>
+    <% @posts.each do |p| %>
+        <tr>
+            <td><%= p.text %></td>
+            <td><%= link_to 'Show', post_path(p) %></td>
+            <td><%= link_to 'Edit', edit_post_path(p) %></td>
+            <td><%= link_to 'Destroy', post_path(p), method: :delete,
+                                                     data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+</table>

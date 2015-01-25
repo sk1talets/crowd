@@ -1,0 +1,20 @@
+<%= form_for(@post, url: post_path(@post)) do |p| %>
+    <% if @post.errors.any? %>
+        <div id="error_explanation">
+            <ul>
+                <% @post.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    
+    <p>
+        <%= p.label :text %><br>
+        <%= p.text_area :text %>
+    </p>
+ 
+    <p> 
+        <%= p.submit %>
+    </p>
+<% end %>
