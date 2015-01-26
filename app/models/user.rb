@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
     validates :name, presence: true,
                      length: { minimum: 4, maximum: 20},
-                     format: { with: /\A[\sa-z\d\-]+\z/i },
+                     format: { with: /\A[\s\w\-]+\z/i },
                      uniqueness: { case_sensitive: false }
 
     has_secure_password

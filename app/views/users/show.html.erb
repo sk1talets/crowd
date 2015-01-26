@@ -1,0 +1,7 @@
+<%= @user.name %>, <%= @user.role %>
+
+<p><%= link_to 'Edit', edit_user_path(@user) %></p>
+<p><%= link_to 'Destroy', user_path(@user), method: :delete,
+                                      data: { confirm: 'Are you sure?' } %></p>
+<%= link_to 'users', users_path %>
+

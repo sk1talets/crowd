@@ -1,0 +1,25 @@
+<%= form_for(@user) do |f| %>
+    <div id="error_explanation">
+        <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+<p>    
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+</p>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+</p>
+<p>    
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+</p>
+<p>    
+
+    <%= f.submit "create" %>
+</p>
+
+<% end %>
