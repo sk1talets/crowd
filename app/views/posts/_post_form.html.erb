@@ -10,11 +10,10 @@
     <% end %>
     
     <p>
-        <%= p.label :text %><br>
-        <%= p.text_area :text %>
+        <%= p.text_area :text, class: "form-control", rows: 10 %>
     </p>
  
     <p> 
-        <%= p.submit %>
+        <%= p.submit "Here is my Post", :class => "btn btn-default" %>
     </p>
 <% end %>
