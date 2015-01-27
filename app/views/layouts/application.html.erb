@@ -17,22 +17,20 @@
        </div> 
        <nav>
         <% if logged_in? %>
-          <%= link_to new_post_path, class: "btn btn-default navbar-btn" do %>
+          <% if current_page?('/posts')%>
+            <%= link_to new_post_path, class: "btn btn-default navbar-btn" do %>
             <span class="glyphicon glyphicon-edit"></span> Write a Post
-          <% end %>
-        <% end %>
-         <!--ul class="nav navbar-nav navbar-right">
-            <li>< %= link_to "Log in", '#' %></li>
-          </ul-->
-        <% if !logged_in? %>
-          <%= link_to login_path, class: "btn btn-default navbar-btn navbar-right" do %>
-            <span class="glyphicon glyphicon-user"></span> Login
-          <% end %>
-        <% else %>
-            <%= link_to logout_path, method: "delete", class: "btn btn-default navbar-btn btn-sm navbar-right" do %>
-                <span class="glyphicon glyphicon-user"></span> Logout
             <% end %>
-            <p class="navbar-text navbar-right"><b><%= link_to current_user.name, user_path(current_user) %></b></p>
+          <% end %>
+          
+          <%= link_to logout_path, method: "delete", class: "btn btn-default navbar-btn btn-sm navbar-right" do %>
+          <span class="glyphicon glyphicon-user"></span> Logout
+          <% end %>
+          <p class="navbar-text navbar-right"><b><%= link_to current_user.name, user_path(current_user) %></b></p>
+        <% else %>
+          <%= link_to login_path, class: "btn btn-default navbar-btn navbar-right" do %>
+          <span class="glyphicon glyphicon-user"></span> Login
+          <% end %>
         <% end %>
         </nav>
       </div>
