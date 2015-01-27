@@ -1,16 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Crowd</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-<%= debug(params) if Rails.env.development? %>
-
-</body>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header class="navbar navbar-static-top">
+      <div class="container">
+       <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+            <img alt="Crowd" src="/assets/icon.png">
+            <span>Crowd</span>
+        </a>
+       </div> 
+       <nav>
+        <% if logged_in? %>
+          <%= link_to new_post_path, class: "btn btn-default navbar-btn" do %>
+            <span class="glyphicon glyphicon-edit"></span> Write a Post
+          <% end %>
+        <% end %>
+         <!--ul class="nav navbar-nav navbar-right">
+            <li>< %= link_to "Log in", '#' %></li>
+          </ul-->
+        <% if !logged_in? %>
+          <%= link_to login_path, class: "btn btn-default navbar-btn navbar-right" do %>
+            <span class="glyphicon glyphicon-user"></span> Login
+          <% end %>
+        <% else %>
+            <%= link_to logout_path, method: "delete", class: "btn btn-default navbar-btn btn-sm navbar-right" do %>
+                <span class="glyphicon glyphicon-user"></span> Logout
+            <% end %>
+            <p class="navbar-text navbar-right"><b><%= link_to current_user.name, user_path(current_user) %></b></p>
+        <% end %>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+      
+      <%= yield %>
+      
+      <%= debug(params) if Rails.env.development? %>
+    </div>
+  </body>
 </html>

@@ -2,3 +2,8 @@
 *= require_tree .
 *= require_self
 */
+
+.btn.btn-default.navbar-btn {
+    margin-top: 28px;
+    margin-left: 50px;
+ }
