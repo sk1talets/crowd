@@ -1,0 +1,11 @@
+<%= form_for(@post.comments.build, remote: true) do |c| %>
+
+    <%= hidden_field_tag :post_id, @post.id %>
+    <%= hidden_field_tag :parent_id %>
+    <%= hidden_field_tag :reply_depth, "0" %>
+    <%= c.text_area :text, class: "form-control", rows: 3 %>
+ 
+    <%= c.submit "Here is what I think", :class => "btn btn-default" %>
+
+<% end %>
+

@@ -1,8 +1,38 @@
-<p>
-  <%= @post.text %>
-</p>
+<% content_for :head do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(document).on('click', '.comment-reply-link', function() {
+        var p = $(this).closest('.comment');
+        var f = $(this).next('.comment-reply-form');
+        f.html('<%= j render "comment_form" %>');
+        f.find('#parent_id').val(p.attr("id"));
+        f.find('#parent_id').val(toInt(p.attr("reply_depth")) + 1);
+        f.find('.form-control').focus();
+      });
+      $(document).on("ajax:success", '.new_comment', function() {
+          $(this).find('.form-control').val('');
+          $(this).closest('.comment-reply-form').hide();
+      });
+    })
+  </script>
+<% end %>
 
-<p><%= link_to 'Edit', edit_post_path(@post) %></p>
-<p><%= link_to 'Destroy', post_path(@post), method: :delete,
-                                      data: { confirm: 'Are you sure?' } %></p>
-<%= link_to 'posts', posts_path %>
+<div class="post">
+  <div class="post-body"><%= @post.text %></div>
+  <div class="post-meta">
+    <span>Wrote <%= @post.user_name %> <%= @post.created_at %></span>
+    <span>Votes: <%= @post.votes.all.inject(0){|sum,e| sum += e.points} %> <%= @post.created_at %></span>
+    <span><%= link_to 'Show', post_path(@post) %></span>
+    <span><%= link_to 'Edit', edit_post_path(@post) %></span>
+    <span><%= link_to 'Destroy', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </div>
+
+<div id="comments" class="comments">
+
+<% @comments.each do |comment| %>
+<%= render :partial => 'comments/show', :locals => { :comment => comment } %>
+<% end %>
+
+</div>
+
+<%= render 'comment_form' %>

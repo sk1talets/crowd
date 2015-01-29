@@ -1,0 +1,1 @@
+$("#<%= dom_id(@post) %>").find("#votes").html("<%= escape_javascript(@post.vote_points.to_s) %>");

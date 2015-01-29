@@ -5,6 +5,8 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    
+    <%= yield :head %>
   </head>
   <body>
     <header class="navbar navbar-static-top">
@@ -17,7 +19,7 @@
        </div> 
        <nav>
         <% if logged_in? %>
-          <% if current_page?('/posts')%>
+          <% if current_page?(:controller => 'posts', :action => 'index')%>
             <%= link_to new_post_path, class: "btn btn-default navbar-btn" do %>
             <span class="glyphicon glyphicon-edit"></span> Write a Post
             <% end %>

@@ -1,0 +1,11 @@
+<% if @comment.comment_id == 0 %>
+
+$("comments").append("<%= escape_javascript(render :partial => 'comments/show', :locals => {:comment => @comment}) %>");
+
+<% else %>
+
+$("#<%= @comment.comment_id %>").after("<%= escape_javascript(render :partial => 'comments/show', :locals => {:comment => @comment}) %>");
+$("#<%= @comment.id %>").addClass("indent_" + (parseInt($("#<%= @comment.comment_id %> ").attr("reply_depth")) + 1));
+
+<% end %>
+

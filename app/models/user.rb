@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+    has_many :posts
+    has_many :comments
+    has_many :votes
     enum role: [:user, :admin]
 
     validates :name, presence: true,
@@ -7,10 +10,11 @@ class User < ActiveRecord::Base
                      uniqueness: { case_sensitive: false }
 
     has_secure_password
-    validates :password, length: { minimum: 6 }
+    validates :password, presence: { on: create }, length: { minimum: 6 }, :if => :password_digest_changed?
 
     after_initialize :init
     def init
         self.role ||= "user"
+        self.vote_weight ||= 1
     end
 end
