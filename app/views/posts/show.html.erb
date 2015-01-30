@@ -1,7 +1,6 @@
 <% content_for :head do %>
   <script type="text/javascript">
-    var on_ready;
-    on_ready = function() {
+    $(document).ready(function() {
       alert(true);
       $(document).on('click', '.comment-reply-link', function() {
         var p = $(this).closest('.comment');
@@ -15,8 +14,7 @@
           $(this).find('.form-control').val('');
           $(this).closest('.comment-reply-form').hide();
       });
-    };
-    $(document).on('ready page:load', on_ready);
+    });
   </script>
 <% end %>
 
