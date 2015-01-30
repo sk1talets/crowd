@@ -1,1 +1,1 @@
-$("#<%= dom_id(@comment) %>").find("#votes").html("<%= escape_javascript(@comment.vote_points.to_s) %>");
+$("#<%= @comment.id %>").find("#votes").html("<%= @comment.vote_points.to_s %>");

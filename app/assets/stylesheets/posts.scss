@@ -1,7 +1,20 @@
 .post {
-    padding-bottom: 30px;
+  padding-top: 30px;
 }
 
-.post-body {
-    margin-botom: 5px;   
- }
+.post .post-body {
+  font-family: Georgia, Times, Times New Roman, serif;        
+  font-size: large;
+  white-space: pre-wrap;
+  margin-bottom: 5px;   
+}
+
+.post .post-alt .post-note {
+  color: #A4A4A4;
+  font-style: italic;
+}
+
+.post .post-alt {
+  font-size: small;
+  padding-left: 10px;
+}

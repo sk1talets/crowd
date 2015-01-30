@@ -1,31 +1,40 @@
 <% content_for :head do %>
   <script type="text/javascript">
-    $(document).ready(function() {
+    var on_ready;
+    on_ready = function() {
+      alert(true);
       $(document).on('click', '.comment-reply-link', function() {
         var p = $(this).closest('.comment');
         var f = $(this).next('.comment-reply-form');
-        f.html('<%= j render "comment_form" %>');
-        f.find('#parent_id').val(p.attr("id"));
-        f.find('#parent_id').val(toInt(p.attr("reply_depth")) + 1);
+        f.html('<%= j render "comments/comment_form" %>');
+        f.find('#comment_parent_id').val(p.attr("id"));
+        f.show();
         f.find('.form-control').focus();
       });
       $(document).on("ajax:success", '.new_comment', function() {
           $(this).find('.form-control').val('');
           $(this).closest('.comment-reply-form').hide();
       });
-    })
+    };
+    $(document).on('ready page:load', on_ready);
   </script>
 <% end %>
 
-<div class="post">
+<div class="post" id="<%= dom_id(@post) %>">
   <div class="post-body"><%= @post.text %></div>
-  <div class="post-meta">
-    <span>Wrote <%= @post.user_name %> <%= @post.created_at %></span>
-    <span>Votes: <%= @post.votes.all.inject(0){|sum,e| sum += e.points} %> <%= @post.created_at %></span>
-    <span><%= link_to 'Show', post_path(@post) %></span>
-    <span><%= link_to 'Edit', edit_post_path(@post) %></span>
-    <span><%= link_to 'Destroy', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <div class="post-alt">
+    <span class="post-note">Wrote <strong><%= @post.user_name %></strong> <%= time_ago_in_words(@post.created_at) %> ago</span>
+    <%= link_to '+', post_voteup_path(@post), remote: true %>
+    <strong id="votes"><%= @post.vote_points %></strong>
+    <%= link_to "-", post_votedown_path(@post), remote: true %>
+    <% if logged_in? and (current_user == @post.user or current_user.admin?) %>
+      <span><%= link_to 'Edit', edit_post_path(@post) %></span>
+      <span><%= link_to 'Destroy', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   </div>
+</div>
+
+<hr>
 
 <div id="comments" class="comments">
 
@@ -35,4 +44,4 @@
 
 </div>
 
-<%= render 'comment_form' %>
+<%= render 'comments/comment_form' %>

@@ -5,11 +5,15 @@
 <article>
 <%= div_for(post) do |p| %>
   <div class="post-body"><%= p.text %></div>
-  <div class="post-meta">
-    <span>Wrote <%= p.user_name %> <%= p.created_at %></span>
-    <%= link_to 'Show', post_path(p) %>
-    <%= link_to 'Edit', edit_post_path(p) %>
-    <%= link_to 'Destroy', post_path(p), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <div class="post-alt">
+    <span class="post-note">Wrote <strong><%= p.user_name %></strong> <%= time_ago_in_words(p.created_at) %> ago</span>
+    <%= link_to 'Read', post_path(p) %>
+    
+    <% if logged_in? and (current_user == post.user or current_user.admin?) %>
+      <%= link_to 'Edit', edit_post_path(p) %>
+      <%= link_to 'Destroy', post_path(p), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+    
     <%= link_to "+", post_voteup_path(p), remote: true %>
     <strong id="votes"><%= p.vote_points %></strong>
     <%= link_to '-', post_votedown_path(p), remote: true %>

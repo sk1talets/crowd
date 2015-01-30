@@ -4,6 +4,35 @@
 */
 
 .btn.btn-default.navbar-btn {
-    margin-top: 28px;
-    margin-left: 50px;
- }
+  margin-top: 28px;
+  margin-left: 20px;
+}
+
+.navbar-nav {
+  margin-top: 12px;
+}
+
+
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+}
+
+.navbar-username {
+  font-size: 2em;    
+  padding-right: 10px;
+}
+
+.login-form {
+  padding-top: 50px;    
+  padding-bottom: 20px;    
+}
+
+html {
+  overflow-y: scroll;
+}
+
+textarea {
+  resize: vertical;
+}
+
+

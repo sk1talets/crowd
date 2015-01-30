@@ -1,7 +1,35 @@
-.comment {  padding-left: 90px}
-.indent_0 { padding-left: 0px}
-.indent_1 { padding-left: 30px}
-.indent_2 { padding-left: 60px}
-.indent_3 { padding-left: 70px}
-.indent_4 { padding-left: 80px}
-.indent_5 { padding-left: 90px}
+
+$indents: 10;
+$indent_step: 30px;
+
+.comment {
+    padding-left: $indents * $indent_step;
+    margin: 5px;
+}
+
+.comment .comment-body {
+    white-space: pre-wrap;
+    font-size: medium;
+}
+
+.comment .comment-alt {
+    padding-left: 5px;    
+}
+
+.comment .comment-alt .comment-note {
+  color: #A4A4A4;
+  font-style: italic;
+}
+
+.comments {
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+@for $i from 0 through $indents { 
+    .indent_#{$i} {
+        padding-left: $i * $indent_step; 
+    }
+}
+
+

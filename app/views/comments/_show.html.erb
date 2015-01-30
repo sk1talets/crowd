@@ -1,7 +1,7 @@
-<div id="<%= comment.id %>" parent_id="<%= comment.comment_id || 0 %>" reply_depth="<%= comment.reply_depth %>" class="comment <%= comment.reply_depth ? "indent_#{comment.reply_depth}" : ""  %>">
+<div id="<%= comment.id %>" parent_id="<%= comment.parent_id || 0 %>" reply_depth="<%= comment.reply_depth %>" class="comment <%= comment.reply_depth ? "indent_#{comment.reply_depth}" : ""  %>">
   <div class="comment-body"><%= comment.text %></div>
-  <div class="comment-info"> 
-    <span>Said <%= comment.user_name %> <%= time_ago_in_words(comment.created_at) %> ago</span>
+  <div class="comment-alt"> 
+    <span class="comment-note">Said <%= comment.user_name %> <%= time_ago_in_words(comment.created_at) %> ago</span>
     <%= link_to '+', comment_voteup_path(comment), remote: true %>
     <strong id="votes"><%= comment.vote_points %></strong>
     <%= link_to "-", comment_votedown_path(comment), remote: true %>

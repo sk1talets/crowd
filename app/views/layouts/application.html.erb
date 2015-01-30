@@ -19,20 +19,28 @@
        </div> 
        <nav>
         <% if logged_in? %>
-          <% if current_page?(:controller => 'posts', :action => 'index')%>
-            <%= link_to new_post_path, class: "btn btn-default navbar-btn" do %>
-            <span class="glyphicon glyphicon-edit"></span> Write a Post
+          <% if current_page?(:controller => 'posts', :action => 'index') %>
+            <%= link_to new_post_path, class: "btn btn-default navbar-btn navbar-left" do %>
+            <span class="glyphicon glyphicon-edit"></span> write a <strong>post</strong>
             <% end %>
+          <% else %>
+            <ul class="nav navbar-nav">
+              <li><%= link_to "Posts", posts_path %></li>
+            </ul>
           <% end %>
           
-          <%= link_to logout_path, method: "delete", class: "btn btn-default navbar-btn btn-sm navbar-right" do %>
-          <span class="glyphicon glyphicon-user"></span> Logout
-          <% end %>
-          <p class="navbar-text navbar-right"><b><%= link_to current_user.name, user_path(current_user) %></b></p>
+          <div class="navbar-right">
+            <div class="navbar-text navbar-right">
+            <%= link_to current_user.name, user_path(current_user), class: "navbar-username" %></strong>
+            <%= link_to "(get out)", logout_path, method: "delete", class: "nav navbar-nav navbar-right"%>
+            </div>
         <% else %>
-          <%= link_to login_path, class: "btn btn-default navbar-btn navbar-right" do %>
-          <span class="glyphicon glyphicon-user"></span> Login
+          <% if !current_page?('/login')%>
+            <%= link_to login_path, class: "btn btn-default navbar-btn navbar-right" do %>
+            <span class="glyphicon glyphicon-user"></span> Login
+            <% end %>
           <% end %>
+          </div>
         <% end %>
         </nav>
       </div>

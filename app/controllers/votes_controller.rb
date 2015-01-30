@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+  before_filter :is_authenticated
+  
   def show
     @vote = Vote.find(params[:id])
   end

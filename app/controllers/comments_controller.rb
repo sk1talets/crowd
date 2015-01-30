@@ -1,14 +1,21 @@
 class CommentsController < ApplicationController
+  include CommentsHelper
+  before_filter :is_authenticated
+
   def new
     @comment = Comment.new
   end
 
   def create
     @comment = current_user.comments.create(comment_params)
-    @post = Post.find(params[:post_id])
+    @post = Post.find(comment_params[:post_id])
+    parent_id = comment_params[:parent_id].to_i
+    parent = parent_id > 0 ? Comment.find(parent_id) : nil 
+    
+    @comment.parent_id = parent_id
+    @comment.thread = (parent ? parent.thread + '/' : '') + int_to_alphadecimal(@comment.id)
+    @comment.reply_depth = parent ? parent.reply_depth + 1 : 0
     @comment.post_id = @post.id
-    @comment.comment_id = params[:parent_id] ? params[:parent_id] : @comment.id
-    @comment.reply_depth = params[:reply_depth]
     @comment.user_name = current_user.name
     @comment.save()
     respond_to do |format|
@@ -43,6 +50,9 @@ class CommentsController < ApplicationController
     
   private
     def comment_params
-      params.require(:comment).permit(:text, :post_id)
+      params.require(:comment).require(:text)
+      params.require(:comment).require(:post_id)
+      params.require(:comment).require(:parent_id)
+      params.require(:comment).permit!
     end
 end

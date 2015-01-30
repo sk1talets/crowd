@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_filter :is_authenticated, :except => [:new, :create] 
+
   def new
   end
   

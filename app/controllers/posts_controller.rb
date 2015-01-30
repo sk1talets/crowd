@@ -1,18 +1,14 @@
 class PostsController < ApplicationController
+  before_filter :is_authenticated
+  skip_before_filter :is_authenticated, :only => [:index]
+  
   def index
       @posts = Post.all
   end
   
   def show
       @post = Post.find(params[:id])
-      @comments = @post.comments.all.order("comment_id ASC").order("created_at ASC")
-      depth = Hash.new(0)
-      @comments.each do |c|
-        if c.comment_id
-          depth[c.id] = depth[c.comment_id] + 1 
-        end
-        c.reply_depth = depth[c.id]
-      end
+      @comments = @post.comments.all.order("thread")
   end
 
   def new

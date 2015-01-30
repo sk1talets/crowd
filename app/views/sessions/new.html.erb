@@ -1,19 +1,24 @@
 <% provide(:title, "Log in") %>
-<h1>Log in</h1>
 
-<%= form_for(:session, url: login_path) do |f| %>
-<p>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-</p>
-<p>
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-</p>
-<p>
-      <%= f.submit "Log in" %>
-</p>
+<%= form_for(:session, url: login_path, html: { class: "login-form form-horizontal" }) do |f| %>
+<div class="form-group">
+  <%= f.label :name, class: "control-label col-sm-2" %>
+  <div class="col-sm-3">
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :password, class: "control-label col-sm-2" %>
+  <div class="col-sm-3">
+    <%= f.password_field :password, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+    <%= f.submit "Log in", class: "btn btn-default col-sm-1" %>
+  </div>
+</div>
 <% end %>
 
-<%= link_to "sign up", signup_path %>
+<h4>Not part of the <strong>crowd</strong>? <%= link_to "Join now!", signup_path %></h4>
 
