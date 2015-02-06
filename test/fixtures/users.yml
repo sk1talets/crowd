@@ -1,9 +1,10 @@
+admin:
+  name: admin
+  password_digest: $2a$10$mL0NtDoOhkHsCo7dO0iz4ux7avxoQBNXoaqiyN3DY8zhjzrRNJ67e
+  role: 1
+
 user:
   name: user
   password_digest: $2a$10$mL0NtDoOhkHsCo7dO0iz4ux7avxoQBNXoaqiyN3DY8zhjzrRNJ67e
   role: 0
                                     
-admin:
-  name: admin
-  password_digest: $2a$10$mL0NtDoOhkHsCo7dO0iz4ux7avxoQBNXoaqiyN3DY8zhjzrRNJ67e
-  role: 1

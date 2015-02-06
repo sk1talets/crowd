@@ -1,0 +1,14 @@
+post_1:
+  text: "text of post 1"
+  user: admin
+  user_name: admin
+
+post_2:
+  text: "text of post 2"
+  user: admin
+  user_name: admin
+
+post_3:
+  text: "text of post 3"
+  user: admin
+  user_name: admin
