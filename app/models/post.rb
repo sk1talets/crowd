@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :votes, :as => :item, dependent: :destroy
-  validates :text, length: { minimum: 50 }
+  validates :text, length: { minimum: 10 }
   
   after_initialize :init
   def init
