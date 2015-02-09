@@ -45,5 +45,9 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # performace testing and benchmarking related tests
+  gem 'rails-perftest'
+  gem 'ruby-prof'
 end
 
