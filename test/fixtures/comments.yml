@@ -1,0 +1,11 @@
+<% for i in 1..10 %>
+comment_<%= $i %>:
+  text: <%= (0...100).map { ('a'..'z').to_a[rand(26)] }.join %>
+  parent_id: 0 
+  user: user
+  user_name: user
+  post: post_1
+  vote_points: <%= rand(50).to_s %>
+  thread: "XxXxXx"
+  reply_depth: 0 
+<% end %>

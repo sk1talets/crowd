@@ -4,7 +4,8 @@ require 'rails/test_help'
 
 class ActiveSupport::TestCase
   fixtures :users
-  fixtures :all
+  fixtures :posts
+  fixtures :comments
 
   def is_logged_in?
     !session[:user_id].nil?
